@@ -97,6 +97,105 @@
           }
         }
       }
+    },
+    "bonds-entities": {
+      "projectType": "library",
+      "root": "projects/bonds-entities",
+      "sourceRoot": "projects/bonds-entities/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/bonds-entities/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/bonds-entities/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/bonds-entities/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/bonds-entities/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    },
+    "bonds-enums": {
+      "projectType": "library",
+      "root": "projects/bonds-enums",
+      "sourceRoot": "projects/bonds-enums/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/bonds-enums/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/bonds-enums/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/bonds-enums/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/bonds-enums/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    },
+    "bonds-ui-kit": {
+      "projectType": "library",
+      "root": "projects/bonds-ui-kit",
+      "sourceRoot": "projects/bonds-ui-kit/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/bonds-ui-kit/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/bonds-ui-kit/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/bonds-ui-kit/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/bonds-ui-kit/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {

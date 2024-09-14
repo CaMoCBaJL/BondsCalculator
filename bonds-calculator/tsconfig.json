@@ -3,6 +3,17 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "paths": {
+      "bonds-entities": [
+        "./dist/bonds-entities"
+      ],
+      "bonds-enums": [
+        "./dist/bonds-enums"
+      ],
+      "bonds-ui-kit": [
+        "./dist/bonds-ui-kit"
+      ]
+    },
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,

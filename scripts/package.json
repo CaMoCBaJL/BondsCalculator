@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "rebuild-all-libraries": "ts-node ./rebuild-all.ts"
+    "rebuild-all-libraries": "node ./rebuild-libs.js"
   },
   "author": "",
   "license": "ISC",
