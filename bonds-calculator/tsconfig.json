@@ -3,6 +3,17 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "paths": {
+      "bonds": [
+        "./dist/bonds"
+      ],
+      "bonds-entities": [
+        "./dist/bonds-entities"
+      ],
+      "shared": [
+        "./dist/shared"
+      ]
+    },
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,

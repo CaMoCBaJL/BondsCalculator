@@ -1,0 +1,13 @@
+{
+  "name": "shared",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^18.2.0",
+    "@angular/core": "^18.2.0",
+    "dayjs": "^1.11.13"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}
