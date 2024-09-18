@@ -1,3 +1,3 @@
-export interface CreaditRating{
-    
+export interface CreditRating{
+    name: string;
 }

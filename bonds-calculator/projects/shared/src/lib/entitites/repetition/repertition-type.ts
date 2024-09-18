@@ -6,5 +6,5 @@ export abstract class RepetitionType implements Entity<Duration>{
     protected _daysUntilNextOperation: number = 0;
     value: Duration = new Duration();
 
-    //copy logic form FunanceApp
+    //copy logic form FinanceApp
 }

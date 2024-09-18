@@ -3,4 +3,4 @@
  */
 
 export * from './lib/entitites/index';
-export * from './lib/utils/empty';
+export * from './lib/utils/index';
