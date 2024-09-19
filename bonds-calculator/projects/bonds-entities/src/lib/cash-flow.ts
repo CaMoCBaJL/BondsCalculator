@@ -1,6 +1,5 @@
-import { assertExhausted } from "shared";
+import { assertExhausted, Money, Percent } from "shared";
 import { PortfolioItem } from "./bond";
-import { Company } from "./interfaces/company";
 
 export abstract class CashFlow {
     constructor(
@@ -18,68 +17,21 @@ export class BondsMontlyCashFlow extends CashFlow {
     }
 
     //TODO: 
-    //1. create money type (float with 2 digits) or increase amounts per 100 times (rouble = 100 pennies)
-    //2. add entity for protfolio item group and incapsulate all related logic there
-    //3. create tests for all methods below
-    //4. think about percent entity
-    //5. think about method decorators (min duration, per year, in roubles, in percents,)
-    summaryCost(): number {
+    //1. create tests for all methods below
+    //2. think about method decorators (min duration, per year, in roubles, in percents,)
+    summaryCost(): Money {
         assertExhausted();
     }
 
-    groupByCompanies(): Map<Company, PortfolioItem[]> {
+    getCashFlowSummaryIncome(): Money {
         assertExhausted();
     }
 
-    getGroupCost(): number {
+    getCashFlowNetProfit(): Money {
         assertExhausted();
     }
 
-    getGroupIncome(): number {
-        assertExhausted();
-    }
-
-    getGroupIncomeAfterCost(): number {
-        assertExhausted();
-    }
-
-    getGroupLeastTicketPaymentAmount(): number {
-        assertExhausted();
-    }
-
-    getGroupTicketPaymentsForMinimalDuration(): number {
-        assertExhausted();
-    }
-
-    getGroupSummaryIncome(): number {
-        assertExhausted();
-    }
-
-    getCashFlowSummaryIncome(): number {
-        assertExhausted();
-    }
-
-    getGroupNetProfit(): number {
-        assertExhausted();
-    }
-
-    getCashFlowNetProfit(): number {
-        assertExhausted();
-    }
-
-    getGroupNetProfitForMinimalDuration(): number {
-        assertExhausted();
-    }
-
-    getCashFlowNetProfitForMinimalDuration(): number {
-        assertExhausted();
-    }
-
-    getGroupMinTicketAmountToROI(): number {
-        assertExhausted();
-    }
-
-    getGroupMinMonthAmountToROI(): number {
+    getCashFlowNetProfitForMinimalDuration(): Money {
         assertExhausted();
     }
 
@@ -91,39 +43,19 @@ export class BondsMontlyCashFlow extends CashFlow {
         assertExhausted();
     }
 
-    //Доходность / год (Р)
-    getGroupYieldPerYearInRoubles(): number {
+    getCashFlowpYieldPerYearInRoubles(): Money {
         assertExhausted();
     }
 
-    //Доходность / год (%)
-    getGroupYieldPerYearInPercent(): number {
+    getCashFlowYieldPerYearInPercent(): Percent {
         assertExhausted();
     }
 
-    getCashFlowpYieldPerYearInRoubles(): number {
+    getCashFlowpYieldPerYearInRoublesForMinimalDuration(): Money {
         assertExhausted();
     }
 
-    getCashFlowYieldPerYearInPercent(): number {
-        assertExhausted();
-    }
-
-    //Доходность / год (Р)
-    getGroupYieldPerYearInRoublesForMinimalDuration(): number {
-        assertExhausted();
-    }
-
-    //Доходность / год (%)
-    getGroupYieldPerYearInPercentForMinimalDuration(): number {
-        assertExhausted();
-    }
-
-    getCashFlowpYieldPerYearInRoublesForMinimalDuration(): number {
-        assertExhausted();
-    }
-
-    getCashFlowYieldPerYearInPercentForMinimalDuration(): number {
+    getCashFlowYieldPerYearInPercentForMinimalDuration(): Percent {
         assertExhausted();
     }
 }
