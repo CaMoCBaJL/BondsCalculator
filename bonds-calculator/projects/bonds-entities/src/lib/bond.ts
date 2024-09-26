@@ -1,11 +1,9 @@
 import * as dayjs from 'dayjs';
 import { BondTicket } from './bond-ticket';
 import { assertExhausted, Money, Percent, RepetitionType } from 'shared';
-import { StockIncome } from './interfaces/income';
+import { IncomeConfig, StockIncome } from './interfaces/income';
 
-export interface BondConfig {
-    readonly name: string;
-    cost: Money;
+export interface BondConfig extends IncomeConfig {
     ticket: BondTicket;
     readonly issueData: dayjs.Dayjs;
     rep: RepetitionType;
@@ -15,13 +13,21 @@ export interface BondConfig {
 export class Bond extends StockIncome {
     constructor(
         public override readonly purchaseDate: dayjs.Dayjs,
-        public config: BondConfig,
+        public override config: BondConfig,
     ) {
-        super(purchaseDate);
+        super(purchaseDate, config);
     }
 
     updateCost(): void {
 
+    }
+
+    override getCost(): Money {
+        return this.config.cost;
+    }
+
+    override getIncome(): Money {
+        assertExhausted();
     }
 }
 
@@ -33,11 +39,23 @@ export class PortfolioItem {
     }
 
     getGroupCost(): Money {
-        assertExhausted();
+        let result: Money = new Money();
+
+        for (const income of this.incomes){
+            result.addMoney(income.getCost());
+        }
+
+        return result;
     }
 
     getGroupIncome(): Money {
-        assertExhausted();
+        let result: Money = new Money();
+
+        for (const income of this.incomes){
+            result.addMoney(income.getCost());
+        }
+
+        return result;
     }
 
     getGroupIncomeAfterCost(): Money {

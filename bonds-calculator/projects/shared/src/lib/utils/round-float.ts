@@ -1,6 +1,6 @@
 import { assertExhausted } from "./assert-exhausted";
 
-export function roundFloatByDigits(value: number, digits: number = 0){
+export function roundFloatByDigits(value: number, digits: number = 0): number{
     if (value % 1 !== 0) {
         assertExhausted('Попытка округлить целое число!');
     }
