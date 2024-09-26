@@ -27,7 +27,7 @@ export class Bond extends StockIncome {
     }
 
     override getIncome(): Money {
-        assertExhausted();
+        return Money.multiplyBy(this.config.ticket.cost, this.config.rep.leftOperationsAmount);
     }
 }
 
@@ -52,7 +52,7 @@ export class PortfolioItem {
         let result: Money = new Money();
 
         for (const income of this.incomes){
-            result.addMoney(income.getCost());
+            result.addMoney(income.getIncome());
         }
 
         return result;

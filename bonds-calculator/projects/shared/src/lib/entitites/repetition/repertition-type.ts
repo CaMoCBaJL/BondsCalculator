@@ -1,3 +1,4 @@
+import { assertExhausted } from "../../utils";
 import { Entity } from "../abstract/entity";
 import { Duration } from "../duration";
 
@@ -7,4 +8,8 @@ export abstract class RepetitionType implements Entity<Duration>{
     value: Duration = new Duration();
 
     //copy logic form FinanceApp
+    get leftOperationsAmount(): number {
+        assertExhausted();
+        return 1;
+    }
 }
