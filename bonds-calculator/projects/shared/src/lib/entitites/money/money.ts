@@ -133,4 +133,24 @@ export class Money {
 
         return result;
     }
+
+    /**
+     * Возвращает число, во сколько раз source > divider.
+     * Результат округлен 2 дох знаков после запятой.
+     */
+    static divide(source: Money, divider: Money): number {
+        if (source.currency !== divider.currency) {
+            assertExhausted('Деление денег в разных валютах не предусмотрено!');
+        }
+
+        if (divider.amountInCents === 0) {
+            assertExhausted('Нельзя делить на 0!');
+        }
+
+        if (source.amountInCents === 0) {
+            assertExhausted('Ноль не разделить!');
+        }
+
+        return roundFloatByDigits(source.amountInCents / divider.amountInCents, 2);
+    }
 }

@@ -30,18 +30,18 @@ export class Bond extends StockIncome {
     //Суммарная доходность (купоны + номинал)
     override getIncome(paymentAmount: number = this.config.rep.leftOperationsAmount): Money {
         const result: Money = this.getTicketsIncome(paymentAmount);
-        result.addMoney(this.getConstIncome());
+        result.addMoney(this.getCostIncome());
 
         return result;
     }
 
     //Доходность с купонов
     getTicketsIncome(paymentAmount: number = this.config.rep.leftOperationsAmount): Money {
-        return Money.multiplyBy(this.config.ticket.cost, paymentAmount);
+        return Money.multiplyBy(this.config.ticket.amount, paymentAmount);
     }
 
     //Доходность с разницы номинала
-    getConstIncome(): Money {
+    getCostIncome(): Money {
         const result: Money = this.config.returnCost.copy;
         result.substractMoney(this.config.cost);
 
@@ -57,7 +57,7 @@ export class BondPortfolioItem {
     }
 
     //Стоимость (на момент указанных цен)
-    getGroupSummaryCost(): Money {
+    getSummaryCost(): Money {
         let result: Money = new Money();
 
         for (const income of this.incomes) {
@@ -68,7 +68,7 @@ export class BondPortfolioItem {
     }
 
     //Суммарная доходность за полный срок владения
-    getGroupSummaryIncomeForFullDuration(): Money {
+    getSummaryIncomeForFullDuration(): Money {
         let result: Money = new Money();
 
         for (const income of this.incomes) {
@@ -79,7 +79,7 @@ export class BondPortfolioItem {
     }
 
     //Минимальное количество выплат по купонам
-    getGroupMinimalTicketPaymentAmount(): number {
+    getMinimalTicketPaymentAmount(): number {
         let result: number = Number.MAX_SAFE_INTEGER;
 
         for (const income of this.incomes) {
@@ -92,9 +92,9 @@ export class BondPortfolioItem {
     }
 
     //Суммарная доходность за минимальный срок владения
-    getGroupSummaryIncomeForMinimalDuration(): Money {
+    getSummaryIncomeForMinimalDuration(): Money {
         let result: Money = new Money();
-        const minmalTickePaymentAmount: number = this.getGroupMinimalTicketPaymentAmount();
+        const minmalTickePaymentAmount: number = this.getMinimalTicketPaymentAmount();
 
         for (const income of this.incomes) {
             result.addMoney(income.getIncome(minmalTickePaymentAmount));
@@ -104,7 +104,7 @@ export class BondPortfolioItem {
     }
 
     //Прибыль с купонов
-    getGroupTicketPaymentsForMinimalDuration(): Money {
+    getTicketPaymentsForMinimalDuration(): Money {
         const result: Money = new Money();
 
         for (const income of this.incomes) {
@@ -115,48 +115,48 @@ export class BondPortfolioItem {
     }
 
     //Чистая прибыль за полный срок владения
-    getGroupNetProfit(): Money {
-        const result: Money = this.getGroupSummaryIncomeForFullDuration();
-        result.substractMoney(this.getGroupSummaryCost());
+    getNetProfit(): Money {
+        const result: Money = this.getSummaryIncomeForFullDuration();
+        result.substractMoney(this.getSummaryCost());
 
         return result;
     }
 
     //Чистая прибыль за минимальный срок владения
-    getGroupNetProfitForMinimalDuration(): Money {
-        const result: Money = this.getGroupSummaryIncomeForMinimalDuration();
-        result.substractMoney(this.getGroupSummaryCost());
+    getNetProfitForMinimalDuration(): Money {
+        const result: Money = this.getSummaryIncomeForMinimalDuration();
+        result.substractMoney(this.getSummaryCost());
 
         return result;
     }
 
     //Мин кол-во купонов для отбива вложений
-    getGroupMinTicketAmountToROI(): number {
-        assertExhausted();
+    getMinTicketAmountToROI(): number {
+        return Money.divide(this.getSummaryCost(), Money.multiplyBy(this.incomes[0].config.ticket.amount, this.incomes.length));
     }
 
     //Мин кол-во месяцев владения для отбива вложений
-    getGroupMinMonthAmountToROI(): number {
+    getMinMonthAmountToROI(): number {
         assertExhausted();
     }
 
     //Доходность / год (Р)
-    getGroupYieldPerYearInRoubles(): Money {
+    getYieldPerYearInRoubles(): Money {
         assertExhausted();
     }
 
     //Доходность / год (%)
-    getGroupYieldPerYearInPercent(): Percent {
+    getYieldPerYearInPercent(): Percent {
         assertExhausted();
     }
 
     //Доходность / год (Р)
-    getGroupYieldPerYearInRoublesForMinimalDuration(): Money {
+    getYieldPerYearInRoublesForMinimalDuration(): Money {
         assertExhausted();
     }
 
     //Доходность / год (%)
-    getGroupYieldPerYearInPercentForMinimalDuration(): Percent {
+    getYieldPerYearInPercentForMinimalDuration(): Percent {
         assertExhausted();
     }
 }

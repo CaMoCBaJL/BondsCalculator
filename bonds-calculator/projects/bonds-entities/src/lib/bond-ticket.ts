@@ -1,6 +1,6 @@
 import { Money } from "shared";
 
 export interface BondTicket{
-    cost: Money;
+    amount: Money;
     percent: number;
 }
