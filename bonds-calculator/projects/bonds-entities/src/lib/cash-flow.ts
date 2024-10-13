@@ -1,17 +1,17 @@
 import { assertExhausted, Money, Percent } from "shared";
-import { PortfolioItem } from "./bond";
+import { BondPortfolioItem } from "./bond";
 
 export abstract class CashFlow {
     constructor(
         protected _amount: number,
-        protected _items: PortfolioItem[],
+        protected _items: BondPortfolioItem[],
     ) { }
 }
 
 export class BondsMontlyCashFlow extends CashFlow {
     constructor(
         protected override _amount: number,
-        protected override _items: PortfolioItem[],
+        protected override _items: BondPortfolioItem[],
     ) {
         super(_amount, _items);
     }
