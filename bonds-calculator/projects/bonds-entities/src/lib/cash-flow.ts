@@ -1,4 +1,4 @@
-import { assertExhausted, Money, Percent } from "shared";
+import { assertExhausted, Money, Percent, RUSSIAN_CURRENCY } from "shared";
 import { BondPortfolioItem } from "./bond";
 
 export abstract class CashFlow {
@@ -20,7 +20,13 @@ export class BondsMontlyCashFlow extends CashFlow {
     //1. create tests for all methods below
     //2. think about method decorators (min duration, per year, in roubles, in percents,)
     summaryCost(): Money {
-        assertExhausted();
+        const result: Money = new Money(this._items[0].currency, 0);
+
+        for (const item of this._items) {
+            result.addMoney(item.getSummaryCost());
+        }
+
+        return result;
     }
 
     getCashFlowSummaryIncome(): Money {

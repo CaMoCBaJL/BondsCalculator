@@ -1,6 +1,6 @@
 import * as dayjs from 'dayjs';
 import { BondTicket } from './bond-ticket';
-import { assertExhausted, Money, Percent, RepetitionType } from 'shared';
+import { assertExhausted, Currency, Money, Percent, RepetitionType } from 'shared';
 import { IncomeConfig, StockIncome } from './interfaces/income';
 
 export interface BondConfig extends IncomeConfig {
@@ -78,6 +78,10 @@ export class BondPortfolioItem {
         return result;
     }
 
+    get currency(): Currency {
+        return this.incomes[0].config.cost.currency;
+    }
+
     //Минимальное количество выплат по купонам
     getMinimalTicketPaymentAmount(): number {
         let result: number = Number.MAX_SAFE_INTEGER;
@@ -135,28 +139,23 @@ export class BondPortfolioItem {
         return Money.divide(this.getSummaryCost(), Money.multiplyBy(this.incomes[0].config.ticket.amount, this.incomes.length));
     }
 
-    //Мин кол-во месяцев владения для отбива вложений
-    getMinMonthAmountToROI(): number {
-        assertExhausted();
-    }
-
-    //Доходность / год (Р)
+    //Доходность / год (Р) за полный срок владения
     getYieldPerYearInRoubles(): Money {
-        assertExhausted();
+        return Money.split(this.getNetProfit(), this.incomes[0].config.rep.operationsPerYearAmount);
     }
 
-    //Доходность / год (%)
+    //Доходность / год (%) за полный срок владения
     getYieldPerYearInPercent(): Percent {
-        assertExhausted();
+        return Percent.createFromMoney(this.getNetProfit(), this.getYieldPerYearInRoubles());
     }
 
-    //Доходность / год (Р)
-    getYieldPerYearInRoublesForMinimalDuration(): Money {
-        assertExhausted();
+    //Доходность / год (Р) за минимальный срок владения
+    getYieldForMinimalDurationInRoubles(): Money {
+        return Money.split(this.getNetProfitForMinimalDuration(), this.getMinimalTicketPaymentAmount());
     }
 
-    //Доходность / год (%)
-    getYieldPerYearInPercentForMinimalDuration(): Percent {
-        assertExhausted();
+    //Доходность / год (%) за минимальный срок владения
+    getYieldForMinimalDurationInPercent(): Percent {
+        return Percent.createFromMoney(this.getNetProfitForMinimalDuration(), this.getYieldForMinimalDurationInRoubles());
     }
 }
