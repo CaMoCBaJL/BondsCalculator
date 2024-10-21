@@ -30,38 +30,74 @@ export class BondsMontlyCashFlow extends CashFlow {
     }
 
     getCashFlowSummaryIncome(): Money {
-        assertExhausted();
+        const result: Money = new Money(this._items[0].currency, 0);
+
+        for (const item of this._items) {
+            result.addMoney(item.getSummaryIncomeForFullDuration());
+        }
+
+        return result;
     }
 
     getCashFlowNetProfit(): Money {
-        assertExhausted();
+        const result: Money = new Money(this._items[0].currency, 0);
+
+        for (const item of this._items) {
+            result.addMoney(item.getNetProfit());
+        }
+
+        return result;
     }
 
     getCashFlowNetProfitForMinimalDuration(): Money {
-        assertExhausted();
+        const result: Money = new Money(this._items[0].currency, 0);
+
+        for (const item of this._items) {
+            result.addMoney(item.getNetProfitForMinimalDuration());
+        }
+
+        return result;
     }
 
     getCashFlowMinTicketAmountToROI(): number {
-        assertExhausted();
+        let result: number = Number.MAX_SAFE_INTEGER;
+
+        for (const item of this._items) {
+            const minTicketAmountToROI: number = item.getMinTicketAmountToROI();
+
+            if (result < minTicketAmountToROI) {
+                result = minTicketAmountToROI;
+            }
+        }
+
+        return result;
     }
 
-    getCashFlowMinMonthAmountToROI(): number {
-        assertExhausted();
-    }
+    getCashFlowYieldPerYearInRoubles(): Money {
+        const result: Money = new Money(this._items[0].currency, 0);
 
-    getCashFlowpYieldPerYearInRoubles(): Money {
-        assertExhausted();
+        for (const item of this._items) {
+            result.addMoney(item.getYieldPerYearInRoubles());
+        }
+
+        return result;
     }
 
     getCashFlowYieldPerYearInPercent(): Percent {
-        assertExhausted();
+        return Percent.createFromMoney(this.getCashFlowNetProfit(), this.getCashFlowYieldPerYearInRoubles());
     }
 
     getCashFlowpYieldPerYearInRoublesForMinimalDuration(): Money {
-        assertExhausted();
+        const result: Money = new Money(this._items[0].currency, 0);
+
+        for (const item of this._items) {
+            result.addMoney(item.getYieldForMinimalDurationInRoubles());
+        }
+
+        return result;
     }
 
     getCashFlowYieldPerYearInPercentForMinimalDuration(): Percent {
-        assertExhausted();
+        return Percent.createFromMoney(this.getCashFlowNetProfitForMinimalDuration(), this.getCashFlowpYieldPerYearInRoublesForMinimalDuration());
     }
 }

@@ -19,6 +19,7 @@ export class Bond extends StockIncome {
         super(purchaseDate, config);
     }
 
+    //TODO: Implement me  after moex integration
     currentCost(): Money {
         assertExhausted();
     }
